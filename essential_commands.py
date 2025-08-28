@@ -2,7 +2,9 @@ from alphagenome.data import genome
 from alphagenome.models import dna_client
 import numpy as np
 import pandas as pd
-
+print("----------------")
+print("-- INTERVALS --")
+print("----------------")
 # A genomic interval is specified using `genome.Interval`:
 interval = genome.Interval(chromosome='chr1', start = 1_000, end = 1_010) #Default hg38
 
