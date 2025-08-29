@@ -39,10 +39,10 @@ organism_map = {'human': dna_client.Organism.HOMO_SAPIENS}
 organism = organism_map[organism]
 
 # A real deletion on the DEAF1 gene of SVI 0162 UDD
-variant_chromosome = 'chr11'
-variant_position = 647_807
-variant_reference_bases = 'GTGCTGGGAGCAGGTGGGTGGACTTGACCCAGGCGGTGCTGGGAGCAGGTGGGTGGACTTGACCCAGGCGGTGCTGGGAGCAGGTGGGTGGACTTGACCCAGGCG'
-variant_alternate_bases = ''
+variant_chromosome = 'chr9'
+variant_position = 134644202
+variant_reference_bases = ''
+variant_alternate_bases = 'GGGGAGGGGGCGGCTGTCCACTGGAGATGCAGGCGTGGC'
 
 variant = genome.Variant(
         chromosome = variant_chromosome,
@@ -87,12 +87,11 @@ print('\n ---- Visualize Variant Effects ---- \n')
 
 # Since I don't know a single thing about what I would select here,
 # I asked Gemini what cell types I should use given the sample phenotype / gene I'm looking at.
-# It suggested the Cerebellum, Brain, and a bunch that weren't supported... I found a third in Caudate Nucleus
 
 # It output Ontology CURIE, and I double checked them from the documentation: https://www.alphagenomedocs.com/colabs/tissue_ontology_mapping.html
 
-ontology_terms = ['UBERON:0002037', 'UBERON:0000955', 'UBERON:0001873'] # Cerebellum, Brain, Caudate Nucleus
-
+# OG_ontology_terms = ['UBERON:0002037', 'UBERON:0000955', 'UBERON:0001873'] # Cerebellum, Brain, Caudate Nucleus
+ontology_terms = ['CL:0002551', 'CL:0002553', 'CL:0002547', 'CL:1001608']
 plot_gene_annotation = True
 plot_longest_transcript_only = True
 
@@ -100,14 +99,6 @@ plot_longest_transcript_only = True
 # There are 13 different output options - each have their own scoring and interpretation
 # https://www.alphagenomedocs.com/exploring_model_metadata.html
 
-# Once again, I'm not exactly sure what I'm looking at, so I asked Gemini which would be the most useful.
-# It said - CAGE (Cap Analysis of Gene Expression): This would give us an idea of the deletion increased or decreased expression of the DEAF1 gene.
-
-# And ATAC (Assay for Transposase-Accessible Chromatin): This would tell us how "Accessible" the DNA is. This could help us interpret the change we see in the CAGE track. EXAMPLE: If the deletion removes an enhancer element, we would expect to see the ATAC peak disappear at that position. --- UPDATE: THESE DONT HAVE DATA FOR ATAC
-
-# We can use ChIP-Histone instead: This tracks measure chemical marks on the DNA that reveal the function of the region. Could reveal a mechanistic link.o --- UPDATE: THIS DIDNT WORK EITHER. 
-
-# I'll try with only CAGE
 
 plot_rna_seq = True # Could be useful if CAGE shows something
 plot_cage = True
@@ -321,4 +312,4 @@ plot = plot_components.plot(
     ],
 )
 
-plot.savefig('deaf1_variant_plot.png')
+plot.savefig('COL5A1_variant_plot.png')
